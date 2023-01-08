@@ -1,16 +1,22 @@
 import { useState, useRef, useEffect } from "react";
 
 function Login() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState([]);
-  const [firstTry, setFirstTry] = useState(true);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form.current);
+    const data = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+    alert("puto");
+  };
   const form = useRef(null);
   return (
     <div className="login">
       <div className="messages">
         <p className="messages-text"></p>
       </div>
-      <form className="login-form form">
+      <form className="login-form form" ref={form}>
         <label htmlFor="email" className="label">
           Correo eléctronico
         </label>
@@ -35,6 +41,7 @@ function Login() {
           className="primary-button login-button"
           value="Entrar"
           type="submit"
+          onClick={handleSubmit}
         ></input>
         <a href="/recovery-password">Olvidé mi contraseña</a>
       </form>
