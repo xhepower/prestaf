@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useUsers } from "../hooks/useUsers";
+import "../styles/Header.scss";
 function Header() {
   const handleClickSalir = () => {
     localStorage.removeItem("token");

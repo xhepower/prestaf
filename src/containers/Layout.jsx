@@ -1,4 +1,4 @@
-import "../styles/Layout.css";
+import "../styles/Layout.scss";
 function Layout({ children }) {
   return <div className="main">{children}</div>;
 }
