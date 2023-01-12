@@ -1,6 +1,32 @@
 import { useState, useRef, useEffect } from "react";
-
+import authService from "../services/auth.service";
+import { useToken } from "../hooks/useToken";
+import logged from "../hooks/useLogged";
 function Login() {
+  //aqui va un hook para que rdeidirja
+
+  const { obtenerToken, guardarToken } = useToken();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState(null);
+  const [token, setToken] = useState(null);
+  logged("/");
+  const handleLogin = async (data) => {
+    const datos = { errors: null, token: null };
+    setIsLoading(true);
+    try {
+      const rta = await authService.login(data);
+      datos.token = rta.data.token;
+      guardarToken(datos.token);
+      window.location.href = "/";
+    } catch (error) {
+      datos.errors = error.response.data;
+    } finally {
+      setIsLoading(false);
+    }
+    console.log(datos);
+    return datos;
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(form.current);
@@ -8,8 +34,10 @@ function Login() {
       email: formData.get("email"),
       password: formData.get("password"),
     };
-    alert("puto");
+
+    const rta = await handleLogin(data);
   };
+
   const form = useRef(null);
   return (
     <div className="login">

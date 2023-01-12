@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 
-const useGetProducts = (API) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [token, setToken] = useState([]);
-  const [errors, setErrors] = useState([]);
-
-  useEffect(async () => {}, []);
-
-  return { token, errors, isLoading };
-};
-
-export default useGetProducts;
+function useToken() {
+  const guardarToken = (token) => {
+    localStorage.setItem("token", token);
+  };
+  const obtenerToken = () => {
+    let token;
+    if (localStorage.getItem("token")) {
+      token = localStorage.getItem("token");
+    } else {
+      token = null;
+    }
+    return token;
+  };
+  return { obtenerToken, guardarToken };
+}
+export { useToken };
