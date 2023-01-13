@@ -7,10 +7,11 @@ function useUsers() {
   const { decodedToken, isExpired } = useJwt(obtenerToken());
 
   const [datos, setDatos] = useState([]);
-
+  const [datosRender, setDatosRender] = useState([]);
   useEffect(() => {
     (async () => {
       setDatos((await userService.getAll()).data);
+      setDatosRender((await userService.getAll()).data);
     })();
   }, []);
   const dato = async (id) => {
@@ -35,7 +36,15 @@ function useUsers() {
   };
 
   const actualizar = (id, data) => {};
-  return { datos, dato, actualizar, eliminar, guardar };
+  return {
+    datos,
+    setDatosRender,
+    datosRender,
+    dato,
+    actualizar,
+    eliminar,
+    guardar,
+  };
 }
 
 export { useUsers };

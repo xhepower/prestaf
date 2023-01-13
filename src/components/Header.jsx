@@ -13,7 +13,7 @@ function Header() {
         <div className="salir">
           <Link to="/">Inicio</Link>
           <Link to="/users">Usuarios</Link>
-
+          <Link to="/clientes">Clientes</Link>
           <Link to="/users" onClick={handleClickSalir}>
             Salir
           </Link>

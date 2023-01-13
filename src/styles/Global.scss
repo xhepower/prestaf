@@ -2,9 +2,15 @@ $color1: #545454;
 $color2: #7b8a84;
 $color3: #8cbfaf;
 $color4: #ede7d5;
-$color5: #b7cc18;
-
+$color5: #cc9318;
+$color6: #cc3318;
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+html {
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
