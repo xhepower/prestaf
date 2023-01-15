@@ -37,7 +37,7 @@ function RecoveryPassword() {
   return (
     <div className="login">
       <div className="Login-container">
-        <form className="form" ref={form}>
+        <form className="form login-form userform form" ref={form}>
           <label htmlFor="email" className="label">
             Correo eléctronico
           </label>

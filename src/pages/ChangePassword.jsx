@@ -65,7 +65,7 @@ function ChangePassword() {
         </div>
       ) : null}
       <div className="Login-container">
-        <form className="form" ref={form}>
+        <form className="login-form userform form" ref={form}>
           <label htmlFor="password1" className="label">
             Nueva Contraseña
           </label>
