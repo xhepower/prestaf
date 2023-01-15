@@ -143,7 +143,40 @@ tbl {
 }
 .inputBusqueda {
   width: 93%;
+  text-align: center;
 }
 .btnbuscar {
-  position: relative;
+  border: 1px solid $color1;
+  border-radius: 5px;
+  background-color: $color1;
+  box-shadow: 2px 2px $color5;
+  color: $color3;
+  cursor: pointer;
+}
+.filtro {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  color: $color1;
+}
+.paginacion-container {
+  border: 2px solid $color1;
+  border-radius: 5px;
+  margin-top: 23px;
+  padding: 5px;
+}
+.pagination {
+  margin: 10px;
+
+  display: flex;
+  justify-content: space-between;
+}
+.page-item {
+  list-style: none;
+  border: 1px solid $color1;
+  border-radius: 5px;
+  background-color: $color1;
+  box-shadow: 2px 2px $color5;
+  color: $color3;
+  cursor: pointer;
 }

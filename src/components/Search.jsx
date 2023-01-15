@@ -1,8 +1,8 @@
 import { useState } from "react";
 function Search(props) {
-  const { datos, setDatosRender } = props;
+  const { datos, setDatosRender, opciones } = props;
   const [searchValue, setSearchValue] = useState("");
-  const [filtroValue, setFiltroValue] = useState("todos");
+  const [filtroValue, setFiltroValue] = useState(opciones[0]);
   const onSearchValueChange = (e) => {
     setSearchValue(e.target.value);
   };
@@ -11,7 +11,17 @@ function Search(props) {
   };
   const filtrar = (event) => {
     event.preventDefault();
-    console.log("puto");
+    if (searchValue == "") {
+      setDatosRender(datos);
+    } else {
+      setDatosRender(
+        datos.filter(
+          (item) =>
+            item[filtroValue].toLowerCase().indexOf(searchValue.toLowerCase()) >
+            -1
+        )
+      );
+    }
   };
   return (
     <form className="search">
@@ -23,6 +33,7 @@ function Search(props) {
           placeholder="Ingrese el termino de busqueda"
           value={searchValue}
           onChange={onSearchValueChange}
+          onSubmit={filtrar}
         />
         <button className="btnbuscar boton" type="button" onClick={filtrar}>
           <span className="icon">
@@ -34,6 +45,16 @@ function Search(props) {
         <legend>
           <label className="label">Buscar por:</label>
         </legend>
+        <select
+          name="filtro"
+          value={filtroValue}
+          onChange={onFiltroChange}
+          className="filtro"
+        >
+          {opciones.map((item) => {
+            return <option key={`option${item}`}>{item}</option>;
+          })}
+        </select>
       </fieldset>
     </form>
   );

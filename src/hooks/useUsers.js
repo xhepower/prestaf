@@ -8,6 +8,7 @@ function useUsers() {
 
   const [datos, setDatos] = useState([]);
   const [datosRender, setDatosRender] = useState([]);
+  const [currentData, setCurrentData] = useState([]);
   useEffect(() => {
     (async () => {
       setDatos((await userService.getAll()).data);
@@ -40,6 +41,8 @@ function useUsers() {
     datos,
     setDatosRender,
     datosRender,
+    currentData,
+    setCurrentData,
     dato,
     actualizar,
     eliminar,
