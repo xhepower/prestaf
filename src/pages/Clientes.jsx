@@ -1,11 +1,11 @@
 import { useJwt } from "react-jwt";
-import { useUsers } from "../hooks/useUsers";
-import { useEffect, useRef, useState } from "react";
+import { useClientes } from "../hooks/useClientes";
+import { useEffect, clienteef, useState } from "react";
 import Search from "../components/Search";
 import Paginacion from "../components/Paginacion";
 import Lista from "../components/Lista";
-import AddUser from "../components/forms/AddUser";
-function Users() {
+import AddCliente from "../components/forms/AddCliente";
+function Clientes() {
   const {
     datos,
     datosRender,
@@ -13,22 +13,24 @@ function Users() {
     currentData,
     setCurrentData,
     eliminar,
+    modificar,
+    seleccionar,
     guardar,
     dato,
     actualizar,
-  } = useUsers();
-
+  } = useClientes();
+  const [ladata, setLadata] = useState([]);
   return (
     <div className="Login">
       <div className="Login-container">
-        <AddUser></AddUser>;
+        <AddCliente></AddCliente>;
       </div>
       <div className="lista">
-        <p className="lista-titulo">Lista de usuarios</p>
+        <p className="lista-titulo">Lista de clientes</p>
         <Search
           datos={datos}
           setDatosRender={setDatosRender}
-          opciones={["email", "role"]}
+          opciones={["nombre", "identidad", "direccion"]}
         ></Search>
         <Paginacion
           datosRender={datosRender
@@ -40,7 +42,6 @@ function Users() {
           pageLimit={5}
           pageNeighbours={2}
         ></Paginacion>
-        {/* <Lista currentData={currentData} eliminar={eliminar}></Lista> */}
         <div className="lista-container">
           {currentData.map((item) => {
             return (
@@ -51,12 +52,16 @@ function Users() {
                     {item.id}
                   </p>
                   <p className="datos-linea">
-                    <b>Email: </b>
-                    {item.email}
+                    <b>Nombre: </b>
+                    {item.nombre}
                   </p>
                   <p className="datos-linea">
-                    <b>Rol: </b>
-                    {item.role}
+                    <b>Identidad: </b>
+                    {item.identidad}
+                  </p>
+                  <p className="datos-linea">
+                    <b>Direccion: </b>
+                    {item.direccion}
                   </p>
                 </div>
                 <div className="lista-actions">
@@ -68,6 +73,22 @@ function Users() {
                   >
                     Eliminar
                   </button>
+                  <button
+                    className="btn-modificar"
+                    onClick={() => {
+                      modificar(item.id, ladata);
+                    }}
+                  >
+                    Modificar
+                  </button>
+                  <button
+                    className="btn-seleccionar"
+                    onClick={() => {
+                      seleccionar(item.id);
+                    }}
+                  >
+                    Seleccionar
+                  </button>
                 </div>
               </div>
             );
@@ -78,4 +99,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default Clientes;
