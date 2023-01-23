@@ -1,22 +1,30 @@
-import { useState } from "react";
-
-const initialState = {
-  activeUser: [],
-};
-
+import { useEffect, useState } from "react";
+import { useJwt } from "react-jwt";
+import { useToken } from "./useToken";
 const useInitialState = () => {
-  const [state, setState] = useState(initialState);
-
-  const setActiveUser = (user) => {
-    setState({
-      ...state,
-      activeUser: [user],
-    });
-  };
-
+  const { obtenerToken } = useToken();
+  const { decodedToken } = useJwt(obtenerToken());
+  const [currentUser, setCurrentUser] = useState(0);
+  const [selectedUser, setSelectedUser] = useState(0);
+  const [selectedCliente, setSelectedCliente] = useState(0);
+  const [selectedRuta, setSelectedRuta] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
+  useEffect(() => {
+    (async () => {
+      setCurrentUser(await (await decodedToken).sub);
+    })();
+  }, []);
   return {
-    state,
-    setActiveUser,
+    currentUser,
+    setCurrentUser,
+    selectedUser,
+    setSelectedUser,
+    selectedCliente,
+    setSelectedCliente,
+    selectedRuta,
+    setSelectedRuta,
+    openModal,
+    setOpenModal,
   };
 };
 

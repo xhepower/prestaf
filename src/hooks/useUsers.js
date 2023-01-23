@@ -1,21 +1,30 @@
 import { useEffect, useState } from "react";
 import userService from "../services/user.service";
-import { useJwt } from "react-jwt";
-import { useToken } from "./useToken";
 function useUsers() {
-  const { obtenerToken } = useToken();
-  const { decodedToken, isExpired } = useJwt(obtenerToken());
-
   const [datos, setDatos] = useState([]);
   const [datosRender, setDatosRender] = useState([]);
   const [currentData, setCurrentData] = useState([]);
-
-  useEffect(() => {
+  const actualizarDatos = () => {
     (async () => {
-      setDatos((await userService.getAll()).data);
-      setDatosRender((await userService.getAll()).data);
+      setDatos(
+        (await userService.getAll()).data
+          .sort(function (a, b) {
+            return a.id - b.id; /* Modificar si se desea otra propiedad */
+          })
+          .reverse()
+      );
+      setDatosRender(
+        (await userService.getAll()).data
+          .sort(function (a, b) {
+            return a.id - b.id; /* Modificar si se desea otra propiedad */
+          })
+          .reverse()
+      );
     })();
-  }, [decodedToken]);
+  };
+  useEffect(() => {
+    actualizarDatos();
+  }, []);
   const dato = async (id) => {
     return await userService.getOne(id);
   };
@@ -24,7 +33,6 @@ function useUsers() {
     if (window.confirm(`¿Desea eliminar el usuario #${id}?`)) {
       (async () => {
         userService.delete(id);
-        window.location.href = window.location.href;
       })();
     }
   };
@@ -33,7 +41,8 @@ function useUsers() {
     if (window.confirm("¿Desea guardar el usuario?")) {
       (async () => {
         userService.save(data);
-        window.location.href = window.location.href;
+        setDatos((await userService.getAll()).data);
+        // window.location.href = window.location.href;
       })();
     }
   };
@@ -41,7 +50,6 @@ function useUsers() {
   const actualizar = (id, data) => {};
   return {
     datos,
-    decodedToken,
     setDatosRender,
     datosRender,
     currentData,
@@ -50,6 +58,7 @@ function useUsers() {
     actualizar,
     eliminar,
     guardar,
+    actualizarDatos,
   };
 }
 

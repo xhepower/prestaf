@@ -1,10 +1,11 @@
 import ReactPaginate from "react-paginate";
 
-import { useState, useEffect } from "react";
-import Lista from "./Lista";
+import { useState, useEffect, useContext } from "react";
+import UserContext from "../../context/UserContext";
 function Paginacion(props) {
-  const { datosRender, pageLimit, pageNeighbours, setCurrentData } = props;
-  const totalRecords = datosRender.length;
+  const { datosRender, setCurrentData } = useContext(UserContext);
+  const { pageLimit } = props;
+  //const totalRecords = datosRender.length;
   const [totalPages, setTotalPages] = useState(
     Math.ceil(datosRender.length / pageLimit)
   );

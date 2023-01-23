@@ -33,6 +33,32 @@
 .container {
   width: 300px;
 }
+.pagina-cabecera {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  align-content: right;
+  margin-bottom: 13px;
+}
+.btn-add {
+  background-color: $color3;
+  color: $color1;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 2px 2px $color5;
+  border: none;
+  font-size: 1.2em;
+  margin: 10px;
+}
+.selectedId {
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 13px;
+  width: 100%;
+  display: inline-block;
+  text-shadow: 1px 1px 2px $color2;
+  color: $color5;
+}
 .form-titulo {
   font-size: 1.6rem;
   text-align: center;
@@ -117,17 +143,29 @@ tbl {
 }
 .lista-item b {
   color: $color2;
+  padding: 5px;
 }
 .lista-actions {
   display: flex;
   gap: 2rem;
-  margin-top: 5px;
+
+  padding: 5px;
   justify-content: space-between;
+}
+.btn-action {
+  border: none;
+  border-radius: 3px;
+  padding: 3px;
+  box-shadow: 2px 2px $color5;
 }
 .btn-eliminar {
   background-color: $color6;
-  border: none;
-  border-radius: 3px;
+}
+.btn-editar {
+  background-color: $color2;
+}
+.btn-seleccionar {
+  background-color: $color4;
 }
 .search {
   width: 100%;

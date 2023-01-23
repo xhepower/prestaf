@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import UserContext from "../../context/UserContext";
 function Search(props) {
-  const { datos, setDatosRender, opciones } = props;
+  const { opciones } = props;
+  const { datos, setDatosRender } = useContext(UserContext);
   const [searchValue, setSearchValue] = useState("");
   const [filtroValue, setFiltroValue] = useState(opciones[0]);
   const onSearchValueChange = (e) => {
@@ -17,14 +19,16 @@ function Search(props) {
       setDatosRender(
         datos.filter(
           (item) =>
-            item[filtroValue].toLowerCase().indexOf(searchValue.toLowerCase()) >
-            -1
+            item[filtroValue]
+              .toString()
+              .toLowerCase()
+              .indexOf(searchValue.toLowerCase()) > -1
         )
       );
     }
   };
   return (
-    <form className="search">
+    <form className="search" onSubmit={filtrar}>
       <div className="search-container">
         <input
           type="search"

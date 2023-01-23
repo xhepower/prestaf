@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import clienteService from "../services/cliente.service";
+import rutaService from "../services/ruta.service";
 import { useJwt } from "react-jwt";
 import { useToken } from "./useToken";
 import { useContext } from "react";
 import Appcontext from "../context/AppContext";
-function useClientes() {
+function useRutas() {
   const { currentUser } = useContext(Appcontext);
   const { obtenerToken } = useToken();
   const { decodedToken, isExpired } = useJwt(obtenerToken());
@@ -15,27 +15,27 @@ function useClientes() {
 
   useEffect(() => {
     (async () => {
-      setDatos((await clienteService.getAll()).data);
-      setDatosRender((await clienteService.getAll()).data);
+      setDatos((await rutaService.getAll()).data);
+      setDatosRender((await rutaService.getAll()).data);
     })();
   }, []);
   const dato = async (id) => {
-    return await clienteService.getOne(id);
+    return await rutaService.getOne(id);
   };
 
   const eliminar = (id) => {
-    if (window.confirm(`¿Desea eliminar el cliente #${id}?`)) {
+    if (window.confirm(`¿Desea eliminar la ruta #${id}?`)) {
       (async () => {
-        clienteService.delete(id);
+        rutaService.delete(id);
       })();
     }
   };
 
   const guardar = async (data) => {
-    if (window.confirm("¿Desea guardar el usuario?")) {
+    if (window.confirm("¿Desea guardar la ruta?")) {
       (async () => {
-        clienteService.save(data);
-        setDatos((await clienteService.getAll()).data);
+        rutaService.save(data);
+        setDatos((await rutaService.getAll()).data);
         // window.location.href = window.location.href;
       })();
     }
@@ -57,4 +57,4 @@ function useClientes() {
   };
 }
 
-export { useClientes };
+export { useRutas };

@@ -9,12 +9,16 @@ import RecoveryPassword from "../pages/RecoveryPassword";
 import ChangePassword from "../pages/ChangePassword";
 import PasswordChanged from "../pages/PasswordChanged";
 import Users from "../pages/Users";
-import Clientes from "../pages/Clientes";
+
 import Appcontext from "../context/AppContext";
+import UserContext from "../context/UserContext";
+
 import useInitialState from "../hooks/useInitialState";
+import { useUsers } from "../hooks/useUsers";
 function App() {
+  const initialState = useInitialState();
   return (
-    <Appcontext.Provider value={useInitialState}>
+    <Appcontext.Provider value={initialState}>
       <BrowserRouter>
         <Routes>
           <Route
@@ -32,15 +36,6 @@ function App() {
             element={
               <IntoLayout>
                 <Users />
-              </IntoLayout>
-            }
-          />
-          <Route
-            exact
-            path="/clientes"
-            element={
-              <IntoLayout>
-                <Clientes />
               </IntoLayout>
             }
           />
