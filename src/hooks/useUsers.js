@@ -4,6 +4,7 @@ function useUsers() {
   const [datos, setDatos] = useState([]);
   const [datosRender, setDatosRender] = useState([]);
   const [currentData, setCurrentData] = useState([]);
+
   const actualizarDatos = () => {
     (async () => {
       setDatos(

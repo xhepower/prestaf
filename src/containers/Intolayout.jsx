@@ -1,8 +1,9 @@
 import Header from "../components/Header";
-import useLogged from "../hooks/useLogged";
 
+import Appcontext from "../context/AppContext";
+import { useContext, useEffect } from "react";
+import { useToken } from "../hooks/useToken";
 export default function Intolayout({ children }) {
-  useLogged("/login");
   return (
     <div className="container">
       <Header />

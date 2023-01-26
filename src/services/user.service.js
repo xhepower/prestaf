@@ -1,11 +1,10 @@
 import http from "../http-commons";
-import { useToken } from "../hooks/useToken";
 
 //const axios = require("axios").default;
 const obtenerToken = () => {
   let token;
-  if (localStorage.getItem("token")) {
-    token = localStorage.getItem("token");
+  if (localStorage.getItem("superdupertoken")) {
+    token = localStorage.getItem("superdupertoken");
   } else {
     token = null;
   }
@@ -13,15 +12,6 @@ const obtenerToken = () => {
 };
 http.defaults.headers.common = { Authorization: `bearer ${obtenerToken()}` };
 class UserService {
-  /*login(data) {
-    return http.post("/auth/login", data);
-  }
-  recoveryPassword(data) {
-    return http.post("/auth/recovery", data);
-  }
-  changePassword(data) {
-    return http.post("/auth/change-password", data);
-  }*/
   getAll() {
     return http.get("/users");
   }

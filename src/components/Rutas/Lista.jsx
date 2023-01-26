@@ -1,42 +1,46 @@
-import { useUsers } from "../../hooks/useUsers";
 import Search from "./Search";
 import Paginacion from "./Paginacion";
 import ItemList from "./ItemList";
 import Appcontext from "../../context/AppContext";
 import PopUp from "../../containers/PopUp";
-import { useContext, useState } from "react";
+import PopUp2 from "../../containers/PopUp2";
+import { useContext } from "react";
 import Add from "./forms/Add";
-import UserContext from "../../context/UserContext";
+import PageUser from "../../pages/Users";
 function Lista() {
-  const { selectedUser, openModal, setOpenModal, setSelectedUser } =
-    useContext(Appcontext);
-  const { sePuedeAgregar } = useContext(UserContext);
+  const {
+    selectedRuta,
+    openModal,
+    setOpenModal,
+    openModal2,
+    setOpenModal2,
+    setSelectedRuta,
+  } = useContext(Appcontext);
   return (
     <>
       <div className="Login-container pagina-cabecera">
-        {!openModal && (
-          <button
-            className=" btn-add"
-            onClick={() => {
-              setOpenModal(true);
+        {}
+        <button
+          className=" btn-add"
+          onClick={() => {
+            setOpenModal(true);
 
-              // <Add guardar={guardar} setOpenModal={setOpenModal}></Add>
-            }}
-          >
-            Crear
-          </button>
-        )}
+            // <Add guardar={guardar} setOpenModal={setOpenModal}></Add>
+          }}
+        >
+          Crear
+        </button>
       </div>
       <div className="lista">
         <p className="lista-titulo">Lista de usuarios</p>
 
-        {selectedUser != 0 && (
+        {selectedRuta != 0 && (
           <div className="selectedId">
-            <p>{`El id seleccionado es ${selectedUser}`}</p>
+            <p>{`El id seleccionado es ${selectedRuta}`}</p>
             <button
               className="btn-eliminar"
               onClick={() => {
-                setSelectedUser(0);
+                setSelectedRuta(0);
               }}
             >
               Deseleccionar
@@ -44,7 +48,7 @@ function Lista() {
           </div>
         )}
 
-        <Search opciones={["id", "email", "role"]}></Search>
+        <Search opciones={["id", "idUser", "descripcion"]}></Search>
         <Paginacion pageLimit={5} pageNeighbours={2}></Paginacion>
         <ItemList></ItemList>
       </div>
@@ -52,6 +56,11 @@ function Lista() {
         <PopUp>
           <Add></Add>
         </PopUp>
+      )}
+      {openModal2 && (
+        <PopUp2>
+          <PageUser></PageUser>
+        </PopUp2>
       )}
     </>
   );

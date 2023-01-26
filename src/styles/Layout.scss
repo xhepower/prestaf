@@ -219,3 +219,15 @@ tbl {
   color: $color3;
   cursor: pointer;
 }
+header {
+  max-width: 300px;
+}
+nav {
+  background-color: $color1;
+  max-width: 300px;
+  justify-self: center;
+}
+nav > a {
+  cursor: pointer;
+  color: $color3;
+}

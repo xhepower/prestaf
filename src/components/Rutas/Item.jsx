@@ -4,7 +4,7 @@ import App from "../../routes/App";
 function Item(props) {
   const { item, eliminar } = props;
 
-  const { setSelectedUser, selectedUser } = useContext(Appcontext);
+  const { setSelectedRuta, selectedRuta } = useContext(Appcontext);
   return (
     <div className={"lista-item"}>
       <div className="lista-datos">
@@ -13,12 +13,12 @@ function Item(props) {
           {item.id}
         </p>
         <p className="datos-linea">
-          <b>Email: </b>
-          {item.email}
+          <b>Id Usuario: </b>
+          {item.idUser}
         </p>
         <p className="datos-linea">
-          <b>Rol: </b>
-          {item.role}
+          <b>Descripcion: </b>
+          {item.descripcion}
         </p>
       </div>
       <div className="lista-actions">
@@ -33,8 +33,9 @@ function Item(props) {
         <button
           className="btn-action btn-seleccionar"
           onClick={() => {
+            // if (confirm(`¿Desea seleccionar el id ${item.id}`)) {
             if (window.confirm(`¿Desea seleccionar el id ${item.id}`)) {
-              setSelectedUser(parseInt(item.id));
+              setSelectedRuta(item.id);
             }
           }}
         >

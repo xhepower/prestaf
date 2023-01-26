@@ -4,8 +4,8 @@ import { useToken } from "../hooks/useToken";
 //const axios = require("axios").default;
 const obtenerToken = () => {
   let token;
-  if (localStorage.getItem("token")) {
-    token = localStorage.getItem("token");
+  if (localStorage.getItem("superdupertoken")) {
+    token = localStorage.getItem("superdupertoken");
   } else {
     token = null;
   }

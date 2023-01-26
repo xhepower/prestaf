@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
 import rutaService from "../services/ruta.service";
-import { useJwt } from "react-jwt";
-import { useToken } from "./useToken";
-import { useContext } from "react";
-import Appcontext from "../context/AppContext";
 function useRutas() {
-  const { currentUser } = useContext(Appcontext);
-  const { obtenerToken } = useToken();
-  const { decodedToken, isExpired } = useJwt(obtenerToken());
-
   const [datos, setDatos] = useState([]);
   const [datosRender, setDatosRender] = useState([]);
   const [currentData, setCurrentData] = useState([]);
-
-  useEffect(() => {
+  const actualizarDatos = () => {
     (async () => {
-      setDatos((await rutaService.getAll()).data);
-      setDatosRender((await rutaService.getAll()).data);
+      setDatos(
+        (await rutaService.getAll()).data
+          .sort(function (a, b) {
+            return a.id - b.id; /* Modificar si se desea otra propiedad */
+          })
+          .reverse()
+      );
+      setDatosRender(
+        (await rutaService.getAll()).data
+          .sort(function (a, b) {
+            return a.id - b.id; /* Modificar si se desea otra propiedad */
+          })
+          .reverse()
+      );
     })();
+  };
+  useEffect(() => {
+    actualizarDatos();
   }, []);
   const dato = async (id) => {
     return await rutaService.getOne(id);
@@ -43,9 +49,7 @@ function useRutas() {
 
   const actualizar = (id, data) => {};
   return {
-    currentUser,
     datos,
-    decodedToken,
     setDatosRender,
     datosRender,
     currentData,
@@ -54,6 +58,7 @@ function useRutas() {
     actualizar,
     eliminar,
     guardar,
+    actualizarDatos,
   };
 }
 

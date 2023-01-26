@@ -1,20 +1,22 @@
 import "../styles/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "../containers/Layout";
+
 import IntoLayout from "../containers/Intolayout";
+import Home from "../pages/Home";
+import Users from "../pages/Users";
+import Rutas from "../pages/Rutas";
+
+import LoginLayout from "../containers/LoginLayout";
 import Login from "../pages/Login";
 import EmailSent from "../pages/EmailSent";
-import Home from "../pages/Home";
+
 import RecoveryPassword from "../pages/RecoveryPassword";
 import ChangePassword from "../pages/ChangePassword";
 import PasswordChanged from "../pages/PasswordChanged";
-import Users from "../pages/Users";
 
 import Appcontext from "../context/AppContext";
-import UserContext from "../context/UserContext";
-
 import useInitialState from "../hooks/useInitialState";
-import { useUsers } from "../hooks/useUsers";
+
 function App() {
   const initialState = useInitialState();
   return (
@@ -39,7 +41,25 @@ function App() {
               </IntoLayout>
             }
           />
-          <Route exact path="/login" element={<Login />} />
+          <Route
+            exact
+            path="/rutas"
+            element={
+              <IntoLayout>
+                <Rutas />
+              </IntoLayout>
+            }
+          />
+
+          <Route
+            exact
+            path="/login"
+            element={
+              <LoginLayout>
+                <Login></Login>
+              </LoginLayout>
+            }
+          />
           <Route
             exact
             path="/recovery-password"
@@ -47,11 +67,6 @@ function App() {
           />
           <Route exact path="/email-sent" element={<EmailSent />} />
           <Route exact path="/recovery" element={<ChangePassword />} />
-          <Route
-            exact
-            path="/password-recovery"
-            element={<PasswordChanged />}
-          />
           <Route
             exact
             path="/password-recovery"

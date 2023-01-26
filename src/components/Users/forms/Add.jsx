@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 function Add(props) {
   const { setOpenModal } = useContext(AppContext);
-  const { guardar, actualizarDatos } = useContext(UserContext);
+  const { guardar, actualizarDatos, sePuedeAgregar } = useContext(UserContext);
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().min(4).max(32).required(),
