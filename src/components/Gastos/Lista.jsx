@@ -9,39 +9,38 @@ import Add from "./forms/Add";
 import PageUser from "../../pages/Users";
 function Lista() {
   const {
-    selectedRuta,
+    selectedGasto,
     openModal,
     setOpenModal,
     openModal2,
     setOpenModal2,
-    setSelectedRuta,
+    setSelectedGasto,
   } = useContext(Appcontext);
   return (
     <>
       <div className="Login-container pagina-cabecera">
-        {!openModal2 && (
-          <button
-            className=" btn-add"
-            onClick={() => {
-              setOpenModal(true);
+        {}
+        <button
+          className=" btn-add"
+          onClick={() => {
+            setOpenModal(true);
 
-              // <Add guardar={guardar} setOpenModal={setOpenModal}></Add>
-            }}
-          >
-            Crear
-          </button>
-        )}
+            // <Add guardar={guardar} setOpenModal={setOpenModal}></Add>
+          }}
+        >
+          Crear
+        </button>
       </div>
       <div className="lista">
-        <p className="lista-titulo">Lista de rutas</p>
+        <p className="lista-titulo">Lista de gastos</p>
 
-        {selectedRuta != 0 && (
+        {selectedGasto != 0 && (
           <div className="selectedId">
-            <p>{`El id seleccionado es ${selectedRuta}`}</p>
+            <p>{`El id seleccionado es ${selectedGasto}`}</p>
             <button
               className="btn-eliminar"
               onClick={() => {
-                setSelectedRuta(0);
+                setSelectedGasto(0);
               }}
             >
               Deseleccionar
@@ -49,7 +48,7 @@ function Lista() {
           </div>
         )}
 
-        <Search opciones={["id", "idUser", "descripcion"]}></Search>
+        <Search opciones={["id", "idUser", "descripcion", "monto"]}></Search>
         <Paginacion pageLimit={5} pageNeighbours={2}></Paginacion>
         <ItemList></ItemList>
       </div>

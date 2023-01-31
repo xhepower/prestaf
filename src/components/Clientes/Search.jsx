@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import RutaContext from "../../context/RutaContext";
+import GastoContext from "../../context/GastoContext";
 function Search(props) {
   const { opciones } = props;
-  const { datos, setDatosRender } = useContext(RutaContext);
+  const { datos, setDatosRender } = useContext(GastoContext);
   const [searchValue, setSearchValue] = useState("");
   const [filtroValue, setFiltroValue] = useState(opciones[0]);
   const onSearchValueChange = (e) => {
@@ -32,7 +32,7 @@ function Search(props) {
       <div className="search-container">
         <input
           type="search"
-          id="textBusquedaRutas"
+          id="textBusquedaClientes"
           className="inputBusqueda"
           placeholder="Ingrese el termino de busqueda"
           value={searchValue}

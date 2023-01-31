@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import Appcontext from "../../context/AppContext";
 import { useContext } from "react";
 function Navbar({ open, setOpen }) {
-  const { removerItem } = useContext(Appcontext);
+  const { removerToken, currentRole } = useContext(Appcontext);
   const handleClickSalir = () => {
-    removerItem();
+    removerToken();
+    window.location.href = "/login";
   };
   const cerrarMenu = () => {
     setOpen(false);
@@ -15,11 +16,18 @@ function Navbar({ open, setOpen }) {
       <Link to="/" className="nav-item" onClick={cerrarMenu}>
         Inicio
       </Link>
-      <Link to="/users" onClick={cerrarMenu}>
-        Usuarios
-      </Link>
-      <Link to="/rutas" onClick={cerrarMenu}>
-        Rutas
+      {currentRole == "admin" && (
+        <>
+          <Link to="/users" onClick={cerrarMenu}>
+            Usuarios
+          </Link>
+          <Link to="/rutas" onClick={cerrarMenu}>
+            Rutas
+          </Link>
+        </>
+      )}
+      <Link to="/prestamos" onClick={cerrarMenu}>
+        Prestamos
       </Link>
       <Link to="/clientes" onClick={cerrarMenu}>
         Clientes
