@@ -14,7 +14,7 @@ function Header() {
 
   return (
     <HeaderWrapper>
-      <h2>Aqui va el nombre del negocio</h2>
+      <h2>CREDIRAPIDOS</h2>
       <Navbar open={open} setOpen={setOpen} />
       <MenuButton open={open} setOpen={setOpen} handleClick={handleClick} />
     </HeaderWrapper>

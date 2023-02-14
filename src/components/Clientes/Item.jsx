@@ -3,7 +3,6 @@ import { useContext } from "react";
 import App from "../../routes/App";
 function Item(props) {
   const { item, eliminar } = props;
-
   const { setSelectedCliente, selectedCliente } = useContext(Appcontext);
   return (
     <div className={"lista-item"}>
@@ -16,6 +15,12 @@ function Item(props) {
           <b>Ruta: </b>
           {item.idRuta}
         </p>
+
+        <p className="datos-linea identado2">
+          <b>Descripcion: </b>
+          {item.Rutum.descripcion}
+        </p>
+
         <p className="datos-linea">
           <b>Nombre: </b>
           {item.nombre}

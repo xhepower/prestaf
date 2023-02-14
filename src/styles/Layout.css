@@ -1,6 +1,6 @@
 * {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -10,10 +10,10 @@ html {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-line-pack: center;
-      align-content: center;
+  align-content: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .main {
@@ -21,10 +21,10 @@ html {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-line-pack: center;
-      align-content: center;
+  align-content: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   border: 4px;
   border-color: #545454;
   max-width: 300px;
@@ -33,10 +33,10 @@ html {
 .login {
   width: 100%;
   -ms-grid-column-align: center;
-      justify-self: center;
+  justify-self: center;
   -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
+  -ms-grid-row-align: center;
+  align-self: center;
 }
 
 .form {
@@ -47,14 +47,14 @@ html {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-line-pack: center;
-      align-content: center;
+  align-content: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .userform {
@@ -75,11 +75,11 @@ html {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
   width: 100%;
   -ms-flex-line-pack: right;
-      align-content: right;
+  align-content: right;
   margin-bottom: 13px;
 }
 
@@ -89,7 +89,7 @@ html {
   border-radius: 10px;
   padding: 5px;
   -webkit-box-shadow: 2px 2px #cc9318;
-          box-shadow: 2px 2px #cc9318;
+  box-shadow: 2px 2px #cc9318;
   border: none;
   font-size: 1.2em;
   margin: 10px;
@@ -138,7 +138,7 @@ label {
 
 .input:focus {
   -webkit-box-shadow: 10px 5px 5px #545454;
-          box-shadow: 10px 5px 5px #545454;
+  box-shadow: 10px 5px 5px #545454;
 }
 
 .primary-button {
@@ -177,8 +177,8 @@ tbl {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   max-width: 300px;
   background-color: #7b8a84;
   border: 2px solid #545454;
@@ -218,16 +218,18 @@ tbl {
   gap: 2rem;
   padding: 5px;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
-
+.identado2 {
+  color: red;
+}
 .btn-action {
   border: none;
   border-radius: 3px;
   padding: 3px;
   -webkit-box-shadow: 2px 2px #cc9318;
-          box-shadow: 2px 2px #cc9318;
+  box-shadow: 2px 2px #cc9318;
 }
 
 .btn-eliminar {
@@ -254,8 +256,8 @@ tbl {
   max-width: 290px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .search-container {
@@ -272,7 +274,7 @@ tbl {
   border-radius: 5px;
   background-color: #545454;
   -webkit-box-shadow: 2px 2px #cc9318;
-          box-shadow: 2px 2px #cc9318;
+  box-shadow: 2px 2px #cc9318;
   color: #8cbfaf;
   cursor: pointer;
 }
@@ -297,8 +299,8 @@ tbl {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .page-item {
@@ -307,7 +309,7 @@ tbl {
   border-radius: 5px;
   background-color: #545454;
   -webkit-box-shadow: 2px 2px #cc9318;
-          box-shadow: 2px 2px #cc9318;
+  box-shadow: 2px 2px #cc9318;
   color: #8cbfaf;
   cursor: pointer;
 }
@@ -320,7 +322,7 @@ nav {
   background-color: #545454;
   max-width: 300px;
   -ms-grid-column-align: center;
-      justify-self: center;
+  justify-self: center;
 }
 
 nav > a {

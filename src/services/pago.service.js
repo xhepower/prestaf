@@ -12,22 +12,22 @@ const obtenerToken = () => {
   return token;
 };
 http.defaults.headers.common = { Authorization: `bearer ${obtenerToken()}` };
-class RutaService {
-  getAll(idUser) {
-    return http.get(`/rutas?idUser=${idUser}`);
+class PagoService {
+  getAll() {
+    return http.get("/pagos");
   }
   getOne(id) {
-    return http.get(`/rutas/${id}`);
+    return http.get(`/pagos/${id}`);
   }
   save(data) {
-    return http.post(`/rutas`, data);
+    return http.post(`/pagos`, data);
   }
   delete(id) {
-    return http.delete(`/rutas/${id}`);
+    return http.delete(`/pagos/${id}`);
   }
   update(id, data) {
-    return http.patch(`/rutas/${id}`, data);
+    return http.patch(`/pagos/${id}`, data);
   }
 }
 
-export default new RutaService();
+export default new PagoService();

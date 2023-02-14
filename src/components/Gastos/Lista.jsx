@@ -49,7 +49,7 @@ function Lista() {
         )}
 
         <Search opciones={["id", "idUser", "descripcion", "monto"]}></Search>
-        <Paginacion pageLimit={5} pageNeighbours={2}></Paginacion>
+        <Paginacion pageLimit={3} pageNeighbours={2}></Paginacion>
         <ItemList></ItemList>
       </div>
       {openModal && (

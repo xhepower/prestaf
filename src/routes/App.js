@@ -9,6 +9,7 @@ import Rutas from "../pages/Rutas";
 import Gastos from "../pages/Gastos";
 import Clientes from "../pages/Clientes";
 import Prestamos from "../pages/Prestamos";
+import Pagos from "../pages/Pagos";
 
 import LoginLayout from "../containers/LoginLayout";
 import Login from "../pages/Login";
@@ -77,6 +78,15 @@ function App() {
             element={
               <IntoLayout>
                 <Prestamos />
+              </IntoLayout>
+            }
+          />
+          <Route
+            exact
+            path="/pagos"
+            element={
+              <IntoLayout>
+                <Pagos />
               </IntoLayout>
             }
           />

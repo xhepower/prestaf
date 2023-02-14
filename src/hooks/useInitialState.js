@@ -14,6 +14,7 @@ const useInitialState = () => {
   const [selectedGasto, setSelectedGasto] = useState(0);
   const [selectedCliente, setSelectedCliente] = useState(0);
   const [selectedPrestamo, setSelectedPrestamo] = useState(0);
+  const [selectedPago, setSelectedPago] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
 
@@ -41,6 +42,8 @@ const useInitialState = () => {
     setSelectedGasto,
     selectedPrestamo,
     setSelectedPrestamo,
+    selectedPago,
+    setSelectedPago,
     openModal,
     setOpenModal,
     openModal2,

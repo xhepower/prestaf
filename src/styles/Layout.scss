@@ -7,6 +7,7 @@
   border-color: $color1;
   max-width: 300px;
 }
+
 .login {
   width: 100%;
   justify-self: center;
@@ -230,4 +231,8 @@ nav {
 nav > a {
   cursor: pointer;
   color: $color3;
+}
+.slider-value {
+  color: $color4;
+  align-self: center;
 }

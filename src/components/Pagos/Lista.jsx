@@ -6,15 +6,15 @@ import PopUp from "../../containers/PopUp";
 import PopUp2 from "../../containers/PopUp2";
 import { useContext } from "react";
 import Add from "./forms/Add";
-import PageCliente from "../../pages/Clientes";
+import PagePrestamo from "../../pages/Prestamos";
 function Lista() {
   const {
-    selectedPrestamo,
+    selectedPago,
     openModal,
     setOpenModal,
     openModal2,
     setOpenModal2,
-    setSelectedPrestamo,
+    setSelectedPago,
   } = useContext(Appcontext);
   return (
     <>
@@ -33,15 +33,15 @@ function Lista() {
         )}
       </div>
       <div className="lista">
-        <p className="lista-titulo">Lista de prestamos</p>
+        <p className="lista-titulo">Lista de pagos</p>
 
-        {selectedPrestamo != 0 && (
+        {selectedPago != 0 && (
           <div className="selectedId">
-            <p>{`El id seleccionado es ${selectedPrestamo}`}</p>
+            <p>{`El id seleccionado es ${selectedPago}`}</p>
             <button
               className="btn-eliminar"
               onClick={() => {
-                setSelectedPrestamo(0);
+                setSelectedPago(0);
               }}
             >
               Deseleccionar
@@ -49,8 +49,8 @@ function Lista() {
           </div>
         )}
 
-        <Search opciones={["idCliente", "monto", "vencimiento"]}></Search>
-        <Paginacion pageLimit={3} pageNeighbours={2}></Paginacion>
+        <Search opciones={["idPrestamo", "monto", "vencimiento"]}></Search>
+        <Paginacion pageLimit={10} pageNeighbours={2}></Paginacion>
         <ItemList></ItemList>
       </div>
       {openModal && (
@@ -60,7 +60,7 @@ function Lista() {
       )}
       {openModal2 && (
         <PopUp2>
-          <PageCliente></PageCliente>
+          <PagePrestamo></PagePrestamo>
         </PopUp2>
       )}
     </>

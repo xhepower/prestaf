@@ -13,24 +13,28 @@ function Item(props) {
           {item.id}
         </p>
         <p className="datos-linea">
-          <b>Cliente: </b>
-          {item.idCliente}
+          <b>Nombre Cliente: </b>
+          {item.Cliente.nombre}
         </p>
         <p className="datos-linea">
-          <b>Nombre: </b>
-          {item.nombre}
+          <b>Saldo: </b>
+          {item.saldo}
         </p>
         <p className="datos-linea">
-          <b>Identidad: </b>
-          {item.identidad}
+          <b>Monto: </b>
+          {item.monto}
         </p>
         <p className="datos-linea">
-          <b>Direccion: </b>
-          {item.direccion}
+          <b>Pagado: </b>
+          <input type="checkbox" disabled checked={item.pagado}></input>
         </p>
         <p className="datos-linea">
-          <b>Telefono: </b>
-          {item.telefono}
+          <b>Fecha: </b>
+          {new Date(item.emitido).toLocaleDateString()}
+        </p>
+        <p className="datos-linea">
+          <b>Vencimiento: </b>
+          {new Date(item.vencimiento).toLocaleDateString()}
         </p>
       </div>
       <div className="lista-actions">

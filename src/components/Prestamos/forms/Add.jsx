@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import PrestamoContext from "../../../context/PrestamoContext";
 import ClienteContext from "../../../context/ClienteContext";
 import AppContext from "../../../context/AppContext";
@@ -21,20 +21,21 @@ function Add(props) {
     monto: yup.number().min(0).required(),
     tasa: yup.number().min(0).max(100).required(),
     vencimiento: yup.date().required(),
+    emitido: yup.date().required(),
     saldo: yup.number().min(0).required(),
   });
   const onIdClienteChange = (e) => {
     setSelectedCliente(parseInt(e.target.value));
-    console.log("hdp");
   };
   const calcularSaldo = (e) => {
     const monto = parseFloat(getValues("monto"));
     const tasa = parseFloat(getValues("tasa") / 3000);
+    setSliderValue(parseFloat(getValues("tasa")));
+    const emision = moment(getValues("emision"));
     const vencimiento = moment(getValues("vencimiento"));
-    const dias = vencimiento.diff(moment(new Date()), "days");
+    const dias = vencimiento.diff(moment(emision), "days");
     const saldo = monto + monto * tasa * dias;
-    setValue("saldo", saldo);
-    console.log(dias);
+    setValue("saldo", parseFloat(saldo));
   };
   const {
     register,
@@ -61,7 +62,7 @@ function Add(props) {
     setOpenModal2(false);
     setOpenModal(false);
   };
-
+  const [sliderValue, setSliderValue] = useState(0);
   return (
     <form className="form clienteform" onSubmit={handleSubmit(save)}>
       <p className="form-titulo">Crear nueva prestamo</p>
@@ -115,10 +116,9 @@ function Add(props) {
         Tasa mensual
       </label>
       <input
-        type="number"
-        step="any"
+        type="range"
         name="tasa"
-        min="0"
+        min="1"
         max="100"
         placeholder="Ingrese la tasa mensual del prestamo"
         className="input input-password"
@@ -127,8 +127,22 @@ function Add(props) {
           onChange: (e) => calcularSaldo(e),
         })}
       />
+      <p className="slider-value input">{sliderValue}</p>
       <p>{errors.tasa?.message}</p>
-
+      <label htmlFor="emitido" className="label">
+        Fecha Emision
+      </label>
+      <input
+        type="date"
+        name="emitido"
+        placeholder="Ingrese la tasa mensual del prestamo"
+        className="input input-password"
+        required
+        {...register("emitido", {
+          onChange: (e) => calcularSaldo(e),
+        })}
+      />
+      <p>{errors.emitido?.message}</p>
       <label htmlFor="tasa" className="label">
         Fecha Vencimiento
       </label>
@@ -149,12 +163,13 @@ function Add(props) {
       </label>
       <input
         type="number"
-        step="any"
+        step="0.00"
         name="saldo"
         min="0"
-        placeholder="Ingrese la tasa mensual del prestamo"
+        align="right"
+        placeholder="0.00"
         className="input input-password"
-        readOnly
+        disabled
         {...register("saldo")}
       />
       <p>{errors.saldo?.message}</p>

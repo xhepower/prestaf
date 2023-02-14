@@ -29,6 +29,9 @@ function Navbar({ open, setOpen }) {
       <Link to="/prestamos" onClick={cerrarMenu}>
         Prestamos
       </Link>
+      <Link to="/pagos" onClick={cerrarMenu}>
+        Pagos
+      </Link>
       <Link to="/clientes" onClick={cerrarMenu}>
         Clientes
       </Link>
