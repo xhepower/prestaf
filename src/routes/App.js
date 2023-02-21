@@ -14,6 +14,7 @@ import Pagos from "../pages/Pagos";
 import LoginLayout from "../containers/LoginLayout";
 import Login from "../pages/Login";
 import EmailSent from "../pages/EmailSent";
+import Reportes from "../pages/Reportes";
 import RecoveryPassword from "../pages/RecoveryPassword";
 import ChangePassword from "../pages/ChangePassword";
 import PasswordChanged from "../pages/PasswordChanged";
@@ -51,6 +52,15 @@ function App() {
             element={
               <IntoLayout>
                 <Rutas />
+              </IntoLayout>
+            }
+          />
+          <Route
+            exact
+            path="/reportes"
+            element={
+              <IntoLayout>
+                <Reportes />
               </IntoLayout>
             }
           />

@@ -6,9 +6,11 @@ function PasswordChanged() {
   };
   return (
     <div className="login">
-      <div className="login-container">
+      <div className="login-container login-form userform form">
         <h1> "La contraseña ha sido cambiada</h1>
-        <button onClick={handleClick}>Regresar al home</button>
+        <button className="primary-button login-button" onClick={handleClick}>
+          Regresar al home
+        </button>
       </div>
     </div>
   );

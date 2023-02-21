@@ -4,30 +4,54 @@ import AppContext from "../../../context/AppContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Spinner from "../../Spinner";
 function Add(props) {
   const { setOpenModal } = useContext(AppContext);
-  const { guardar, actualizarDatos, sePuedeAgregar } = useContext(UserContext);
+  const { guardar, actualizarDatos, isLoading, setIsLoading } =
+    useContext(UserContext);
   const schema = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().min(4).max(32).required(),
+    email: yup
+      .string()
+      .email("no cumple con el formato de email")
+      .required("Es un campo requerido"),
+    password: yup
+      .string()
+      .min(4, "LA contraseña no puede ser menor a 4 caracteres")
+      .max(32)
+      .required("Es un campo requerido"),
   });
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
+    setError,
+    clearErrors,
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
   const save = async (data) => {
-    const rta = await guardar(data);
-    reset();
-    actualizarDatos();
-    setOpenModal(false);
+    clearErrors();
+    try {
+      const rta = await guardar(data);
+      reset();
+      actualizarDatos();
+      clearErrors();
+      setOpenModal(false);
+    } catch (error) {
+      setIsLoading(false);
+      setError("server", error);
+    }
   };
 
   return (
     <form className="form userform" onSubmit={handleSubmit(save)}>
+      {isLoading && Spinner}
+
       <p className="form-titulo">Crear nuevo usuario</p>
       <label htmlFor="email" className="label">
         Correo eléctronico
@@ -40,7 +64,7 @@ function Add(props) {
         required
         {...register("email")}
       />
-      <p>{errors.email?.message}</p>
+      <p className="errors">{errors.email?.message}</p>
       <label htmlFor="password" className="label">
         Contraseña
       </label>
@@ -52,7 +76,7 @@ function Add(props) {
         required
         {...register("password")}
       />
-      <p>{errors.password?.message}</p>
+      <p className="errors">{errors.password?.message}</p>
       <label htmlFor="role" className="label">
         Rol
       </label>
@@ -65,7 +89,7 @@ function Add(props) {
         <option value="user">Cobrador</option>
         <option value="admin">Administrador</option>
       </select>
-      <p>{errors.role?.message}</p>
+      <p className="errors">{errors.role?.message}</p>
       <button className="primary-button login-button" type="submit">
         Guardar
       </button>

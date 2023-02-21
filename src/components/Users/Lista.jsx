@@ -1,4 +1,4 @@
-import { useUsers } from "../../hooks/useUsers";
+import Spinner from "../Spinner";
 import Search from "./Search";
 import Paginacion from "./Paginacion";
 import ItemList from "./ItemList";
@@ -10,7 +10,8 @@ import UserContext from "../../context/UserContext";
 function Lista() {
   const { selectedUser, openModal, setOpenModal, setSelectedUser } =
     useContext(Appcontext);
-  const { sePuedeAgregar } = useContext(UserContext);
+  const { isLoading, setIsLoading, isError, setIsError } =
+    useContext(UserContext);
   return (
     <>
       <div className="Login-container pagina-cabecera">
@@ -19,8 +20,6 @@ function Lista() {
             className=" btn-add"
             onClick={() => {
               setOpenModal(true);
-
-              // <Add guardar={guardar} setOpenModal={setOpenModal}></Add>
             }}
           >
             Crear
@@ -29,6 +28,7 @@ function Lista() {
       </div>
       <div className="lista">
         <p className="lista-titulo">Lista de usuarios</p>
+        {isLoading && <Spinner></Spinner>}
 
         {selectedUser != 0 && (
           <div className="selectedId">

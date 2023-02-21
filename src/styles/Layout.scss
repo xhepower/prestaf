@@ -69,6 +69,12 @@
   text-shadow: 1px 1px 2px $color2;
   color: $color5;
 }
+.errors {
+  margin-bottom: 10px;
+  color: $color6;
+  text-align: left;
+  text-emphasis: bold;
+}
 .login {
   width: 100%;
 }

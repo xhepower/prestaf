@@ -31,9 +31,9 @@ function Add(props) {
     const monto = parseFloat(getValues("monto"));
     const tasa = parseFloat(getValues("tasa") / 3000);
     setSliderValue(parseFloat(getValues("tasa")));
-    const emision = moment(getValues("emision"));
+    const emitido = moment(getValues("emitido"));
     const vencimiento = moment(getValues("vencimiento"));
-    const dias = vencimiento.diff(moment(emision), "days");
+    const dias = vencimiento.diff(emitido, "days");
     const saldo = monto + monto * tasa * dias;
     setValue("saldo", parseFloat(saldo));
   };
@@ -130,7 +130,7 @@ function Add(props) {
       <p className="slider-value input">{sliderValue}</p>
       <p>{errors.tasa?.message}</p>
       <label htmlFor="emitido" className="label">
-        Fecha Emision
+        Fecha Emitido
       </label>
       <input
         type="date"

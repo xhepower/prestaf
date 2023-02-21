@@ -1,0 +1,12 @@
+@import "Global";
+.cuadro {
+  background-color: $color2;
+  max-width: 300px;
+  width: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  border: 1px solid $color1;
+  margin: 1%;
+  border-radius: 5px;
+}

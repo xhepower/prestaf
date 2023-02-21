@@ -1,16 +1,56 @@
+import { useContext } from "react";
+import Homecontext from "../../context/HomeContext";
+import { usePrestamos } from "../../hooks/usePrestamos";
+import Appcontext from "../../context/AppContext";
+import moment from "moment";
+import Paginacion from "./Paginacion";
+import Spinner from "../Spinner";
 function Home() {
+  const prestamos = usePrestamos();
+  const datosPrestamos = prestamos.datos;
+  const { currentUser, currentRole } = useContext(Appcontext);
+  let vencidos = [];
+  let porVencer = [];
+  datosPrestamos.map((prestamo) => {
+    if (prestamo.pagado == false) {
+      if (currentRole == "admin") {
+        if (moment(prestamo.vencimiento) <= moment(new Date())) {
+          vencidos.push(prestamo);
+        }
+        if (
+          moment(prestamo.vencimiento) > moment(new Date()) &&
+          moment(prestamo.vencimiento).diff(moment(new Date()), "days") <= 3
+        ) {
+          porVencer.push(prestamo);
+        }
+      } else {
+        if (prestamo.Cliente.Rutum.idUser == currentUser) {
+          if (moment(prestamo.vencimiento) <= moment(new Date())) {
+            vencidos.push(prestamo);
+          }
+          if (
+            moment(prestamo.vencimiento) > moment(new Date()) &&
+            moment(prestamo.vencimiento).diff(moment(new Date()), "days") <= 3
+          ) {
+            porVencer.push(prestamo);
+          }
+        }
+      }
+    }
+  });
+
   return (
     <>
-      <div className="input">Estas funciones aún no están disponibles:</div>
-      <div className="input">
-        <button className="primary-button">Actualizar moras</button>
-      </div>
-      <div className="input">
-        <p>Prestamos Vencidos:</p>
-      </div>
-      <div className="input">
-        <p>Prestamos por vencer:</p>
-      </div>
+      <Paginacion
+        prestamos={porVencer}
+        pageLimit={5}
+        titulo="Prestamos por vencer"
+      ></Paginacion>
+      <Paginacion
+        prestamos={vencidos}
+        pageLimit={5}
+        titulo="Prestamos vencidos"
+      ></Paginacion>
     </>
   );
 }

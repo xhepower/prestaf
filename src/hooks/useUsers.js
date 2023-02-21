@@ -4,9 +4,10 @@ function useUsers() {
   const [datos, setDatos] = useState([]);
   const [datosRender, setDatosRender] = useState([]);
   const [currentData, setCurrentData] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const actualizarDatos = () => {
     (async () => {
+      setIsLoading(true);
       setDatos(
         (await userService.getAll()).data
           .sort(function (a, b) {
@@ -21,6 +22,7 @@ function useUsers() {
           })
           .reverse()
       );
+      setIsLoading(false);
     })();
   };
   useEffect(() => {
@@ -33,7 +35,9 @@ function useUsers() {
   const eliminar = (id) => {
     if (window.confirm(`¿Desea eliminar el usuario #${id}?`)) {
       (async () => {
+        setIsLoading(true);
         userService.delete(id);
+        setIsLoading(true);
       })();
     }
   };
@@ -41,7 +45,9 @@ function useUsers() {
   const guardar = async (data) => {
     if (window.confirm("¿Desea guardar el usuario?")) {
       (async () => {
+        setIsLoading(true);
         userService.save(data);
+        setIsLoading(false);
         setDatos((await userService.getAll()).data);
         // window.location.href = window.location.href;
       })();
@@ -51,6 +57,8 @@ function useUsers() {
   const actualizar = (id, data) => {};
   return {
     datos,
+    isLoading,
+    setIsLoading,
     setDatosRender,
     datosRender,
     currentData,
