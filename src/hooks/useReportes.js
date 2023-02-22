@@ -38,12 +38,11 @@ function useReportes() {
     resolver: yupResolver(schema),
   });
   const entreFechas = (fecha, desde, hasta) => {
-    // if (fecha >= desde && fecha <= hasta) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-    return moment(fecha).isBetween(moment(desde), moment(hasta));
+    if (fecha >= desde && fecha <= hasta) {
+      return true;
+    } else {
+      return false;
+    }
   };
   const retrieve = async (data, e) => {
     const { fecha1, fecha2 } = data;
@@ -56,9 +55,15 @@ function useReportes() {
       let sumaPrestamo = 0;
       let sumaGasto = 0;
       let sumaPago = 0;
+      // datosPrestamos.map((item) =>
+      //   console.log(entreFechas(moment(item.emitido).toDate(), fecha1, fecha2))
+      // );
       setPrestamos(
         datosPrestamos.filter((item) => {
-          if (entreFechas(item.emitido, fecha1, fecha2)) {
+          console.log(
+            entreFechas(moment(item.emitido).toDate(), fecha1, fecha2)
+          );
+          if (entreFechas(moment(item.emitido).toDate(), fecha1, fecha2)) {
             setsPrestamos(sPrestamos + item.monto);
             return true;
           } else {
@@ -66,6 +71,7 @@ function useReportes() {
           }
         })
       );
+
       console.log(prestamos);
       console.log(sPrestamos);
       setIsLoading(false);
