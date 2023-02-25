@@ -17,6 +17,10 @@ function Item(props) {
           {item.Cliente.nombre}
         </p>
         <p className="datos-linea">
+          <b>Ruta: </b>
+          {item.Cliente.Rutum.descripcion}
+        </p>
+        <p className="datos-linea">
           <b>Saldo: </b>
           {item.saldo}
         </p>
@@ -29,12 +33,16 @@ function Item(props) {
           <input type="checkbox" disabled checked={item.pagado}></input>
         </p>
         <p className="datos-linea">
+          <b>Mora: </b>
+          {item.mora}
+        </p>
+        <p className="datos-linea">
           <b>Fecha: </b>
-          {new Date(item.emitido).toLocaleDateString()}
+          {item.emitido}
         </p>
         <p className="datos-linea">
           <b>Vencimiento: </b>
-          {new Date(item.vencimiento).toLocaleDateString()}
+          {item.vencimiento}
         </p>
       </div>
       <div className="lista-actions">

@@ -17,7 +17,7 @@ function Prestamo(props) {
               <tr key={`vencido${prestamo.id}`} className="tabla-fila">
                 <td>{prestamo.id}</td>
                 <td>{prestamo.Cliente.nombre}</td>
-                <td>{new Date(prestamo.vencimiento).toLocaleDateString()}</td>
+                <td>{prestamo.vencimiento}</td>
               </tr>
             );
           })}

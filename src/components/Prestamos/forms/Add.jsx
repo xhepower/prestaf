@@ -1,71 +1,25 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import PrestamoContext from "../../../context/PrestamoContext";
-import ClienteContext from "../../../context/ClienteContext";
-import AppContext from "../../../context/AppContext";
-import ClientesPage from "../../../pages/Clientes";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import moment, { now } from "moment/moment";
+import Spinner from "../../Spinner";
 function Add(props) {
   const {
-    setOpenModal,
-    setOpenModal2,
     selectedCliente,
-    setSelectedCliente,
-    currentUser,
-  } = useContext(AppContext);
-  const { guardar, actualizarDatos } = useContext(PrestamoContext);
-  const schema = yup.object().shape({
-    idCliente: yup.number().integer().min(1),
-    monto: yup.number().min(0).required(),
-    tasa: yup.number().min(0).max(100).required(),
-    vencimiento: yup.date().required(),
-    emitido: yup.date().required(),
-    saldo: yup.number().min(0).required(),
-  });
-  const onIdClienteChange = (e) => {
-    setSelectedCliente(parseInt(e.target.value));
-  };
-  const calcularSaldo = (e) => {
-    const monto = parseFloat(getValues("monto"));
-    const tasa = parseFloat(getValues("tasa") / 3000);
-    setSliderValue(parseFloat(getValues("tasa")));
-    const emitido = moment(getValues("emitido"));
-    const vencimiento = moment(getValues("vencimiento"));
-    const dias = vencimiento.diff(emitido, "days");
-    const saldo = monto + monto * tasa * dias;
-    setValue("saldo", parseFloat(saldo));
-  };
-  const {
-    register,
     handleSubmit,
-    getValues,
-    setValue,
-    formState: { errors },
-    reset,
-  } = useForm({
-    defaultValues: {
-      monto: 0,
-      tasa: 0,
-      vencimiento: new Date(),
-    },
-    resolver: yupResolver(schema),
-  });
+    save,
+    onIdClienteChange,
+    register,
+    setOpenModal2,
+    errors,
+    calcularSaldo,
+    sliderValue,
+    isLoading,
+  } = useContext(PrestamoContext);
 
-  const save = async (data) => {
-    data.idUser = currentUser;
-    const rta = await guardar(data);
-    reset();
-    actualizarDatos();
-    setSelectedCliente(0);
-    setOpenModal2(false);
-    setOpenModal(false);
-  };
-  const [sliderValue, setSliderValue] = useState(0);
   return (
-    <form className="form clienteform" onSubmit={handleSubmit(save)}>
+    <form className="form clienteform" onSubmit={handleSubmit(save)} noValidate>
       <p className="form-titulo">Crear nueva prestamo</p>
+      {isLoading && <Spinner></Spinner>}
+      <p className="errors">{errors.server?.message}</p>
       <label htmlFor="idCliente" className="label">
         Id Cliente:
       </label>
@@ -93,7 +47,7 @@ function Add(props) {
           </span>
         </button>
       </div>
-      <p>{errors.idCliente?.message}</p>
+      <p className="errors">{errors.idCliente?.message}</p>
 
       <label htmlFor="monto" className="label">
         Monto
@@ -110,7 +64,7 @@ function Add(props) {
           onChange: (e) => calcularSaldo(e),
         })}
       />
-      <p>{errors.monto?.message}</p>
+      <p className="errors">{errors.monto?.message}</p>
 
       <label htmlFor="tasa" className="label">
         Tasa mensual
@@ -128,7 +82,7 @@ function Add(props) {
         })}
       />
       <p className="slider-value input">{sliderValue}</p>
-      <p>{errors.tasa?.message}</p>
+      <p className="errors">{errors.tasa?.message}</p>
       <label htmlFor="emitido" className="label">
         Fecha Emitido
       </label>
@@ -142,7 +96,7 @@ function Add(props) {
           onChange: (e) => calcularSaldo(e),
         })}
       />
-      <p>{errors.emitido?.message}</p>
+      <p className="errors">{errors.emitido?.message}</p>
       <label htmlFor="tasa" className="label">
         Fecha Vencimiento
       </label>
@@ -156,7 +110,7 @@ function Add(props) {
           onChange: (e) => calcularSaldo(e),
         })}
       />
-      <p>{errors.vencimiento?.message}</p>
+      <p className="errors">{errors.vencimiento?.message}</p>
 
       <label htmlFor="saldo" className="label">
         Saldo
@@ -172,7 +126,7 @@ function Add(props) {
         disabled
         {...register("saldo")}
       />
-      <p>{errors.saldo?.message}</p>
+      <p className="errors">{errors.saldo?.message}</p>
 
       <button className="primary-button login-button" type="submit">
         Guardar

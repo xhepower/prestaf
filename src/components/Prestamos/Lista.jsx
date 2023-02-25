@@ -7,6 +7,8 @@ import PopUp2 from "../../containers/PopUp2";
 import { useContext } from "react";
 import Add from "./forms/Add";
 import PageCliente from "../../pages/Clientes";
+import Spinner from "../Spinner";
+import PrestamoContext from "../../context/PrestamoContext";
 function Lista() {
   const {
     selectedPrestamo,
@@ -16,6 +18,7 @@ function Lista() {
     setOpenModal2,
     setSelectedPrestamo,
   } = useContext(Appcontext);
+  const { isLoading, errors } = useContext(PrestamoContext);
   return (
     <>
       <div className="Login-container pagina-cabecera">
@@ -34,7 +37,8 @@ function Lista() {
       </div>
       <div className="lista">
         <p className="lista-titulo">Lista de prestamos</p>
-
+        {isLoading && <Spinner></Spinner>}
+        <p className="errors">{errors.server?.message}</p>
         {selectedPrestamo != 0 && (
           <div className="selectedId">
             <p>{`El id seleccionado es ${selectedPrestamo}`}</p>

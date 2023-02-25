@@ -12,25 +12,26 @@ function Home() {
   let vencidos = [];
   let porVencer = [];
   datosPrestamos.map((prestamo) => {
+    console.log(moment().toDate(), moment(prestamo.vencimiento).toDate());
     if (prestamo.pagado == false) {
       if (currentRole == "admin") {
-        if (moment(prestamo.vencimiento) <= moment(new Date())) {
+        if (moment(prestamo.vencimiento) <= moment()) {
           vencidos.push(prestamo);
         }
         if (
-          moment(prestamo.vencimiento) > moment(new Date()) &&
-          moment(prestamo.vencimiento).diff(moment(new Date()), "days") <= 3
+          moment(prestamo.vencimiento) > moment() &&
+          moment(prestamo.vencimiento).diff(moment(), "days") <= 3
         ) {
           porVencer.push(prestamo);
         }
       } else {
         if (prestamo.Cliente.Rutum.idUser == currentUser) {
-          if (moment(prestamo.vencimiento) <= moment(new Date())) {
+          if (moment(prestamo.vencimiento) <= moment()) {
             vencidos.push(prestamo);
           }
           if (
-            moment(prestamo.vencimiento) > moment(new Date()) &&
-            moment(prestamo.vencimiento).diff(moment(new Date()), "days") <= 3
+            moment(prestamo.vencimiento) > moment() &&
+            moment(prestamo.vencimiento).diff(moment(), "days") <= 3
           ) {
             porVencer.push(prestamo);
           }
