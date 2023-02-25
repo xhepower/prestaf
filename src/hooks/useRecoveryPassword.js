@@ -26,7 +26,6 @@ function useRecoveryPassword() {
   });
 
   const save = async (data) => {
-    //console.log(data);
     setIsLoading(true);
     clearErrors();
     try {

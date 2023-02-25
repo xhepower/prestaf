@@ -1,41 +1,21 @@
 import { useContext } from "react";
 import RutaContext from "../../../context/RutaContext";
-import UserContext from "../../../context/UserContext";
-import AppContext from "../../../context/AppContext";
-import UsersPage from "../../../pages/Users";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import Spinner from "../../Spinner";
 function Add(props) {
-  const { setOpenModal, setOpenModal2, selectedUser, setSelectedUser } =
-    useContext(AppContext);
-  const { guardar, actualizarDatos } = useContext(RutaContext);
-  const schema = yup.object().shape({
-    idUser: yup.number().integer().min(1),
-    descripcion: yup.string().min(4).max(32).required(),
-  });
-  const onIdUserChange = (e) => {
-    setSelectedUser(parseInt(e.target.value));
-  };
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-  const save = async (data) => {
-    const rta = await guardar(data);
-    reset();
-    actualizarDatos();
-    setSelectedUser(0);
-    setOpenModal2(false);
-    setOpenModal(false);
-  };
-
+    errors,
+    save,
+    setValue,
+    selectedUser,
+    setOpenModal2,
+    isLoading,
+  } = useContext(RutaContext);
   return (
-    <form className="form userform" onSubmit={handleSubmit(save)}>
+    <form className="form userform" onSubmit={handleSubmit(save)} noValidate>
+      {isLoading && <Spinner></Spinner>}
+      <p className="errors">{errors.server?.message}</p>
       <p className="form-titulo">Crear nueva ruta</p>
       <label htmlFor="idUser" className="label">
         Id Usuario:
@@ -47,9 +27,11 @@ function Add(props) {
           name="idUser"
           placeholder="Ingrese aquí el id del usuario"
           className="input input-email"
-          value={selectedUser}
           required
-          onChange={onIdUserChange}
+          value={selectedUser}
+          onChange={() => {
+            setValue("idUser", selectedUser);
+          }}
           {...register("idUser")}
         />
         <button

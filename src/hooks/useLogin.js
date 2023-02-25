@@ -33,7 +33,6 @@ function useLogin() {
   });
 
   const save = async (data) => {
-    //console.log(data);
     setIsLoading(true);
     clearErrors();
     try {

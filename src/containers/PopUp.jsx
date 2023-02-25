@@ -11,11 +11,12 @@ function PopUp({ children }) {
         <button
           className=" btn-add"
           onClick={() => {
-            if (openModal2) {
-              setOpenModal2(false);
-            } else {
-              setOpenModal(false);
-            }
+            // if (openModal2) {
+            //   setOpenModal2(false);
+            // } else {
+            //   setOpenModal(false);
+            // }
+            setOpenModal(false);
           }}
         >
           Cerrar

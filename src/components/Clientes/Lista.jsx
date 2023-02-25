@@ -6,16 +6,18 @@ import PopUp from "../../containers/PopUp";
 import PopUp2 from "../../containers/PopUp2";
 import { useContext } from "react";
 import Add from "./forms/Add";
+import Spinner from "../Spinner";
 import PageRuta from "../../pages/Rutas";
+import ClienteContext from "../../context/ClienteContext";
 function Lista() {
   const {
     selectedCliente,
     openModal,
     setOpenModal,
     openModal2,
-    setOpenModal2,
     setSelectedCliente,
   } = useContext(Appcontext);
+  const { isLoading, errors } = useContext(ClienteContext);
   return (
     <>
       <div className="Login-container pagina-cabecera">
@@ -34,7 +36,8 @@ function Lista() {
       </div>
       <div className="lista">
         <p className="lista-titulo">Lista de clientes</p>
-
+        {isLoading && <Spinner></Spinner>}
+        <p className="errors">{errors.server?.message}</p>
         {selectedCliente != 0 && (
           <div className="selectedId">
             <p>{`El id seleccionado es ${selectedCliente}`}</p>

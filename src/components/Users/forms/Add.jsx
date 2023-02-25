@@ -1,57 +1,15 @@
 import { useContext, useRef } from "react";
 import UserContext from "../../../context/UserContext";
-import AppContext from "../../../context/AppContext";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+
 import Spinner from "../../Spinner";
 function Add(props) {
-  const { setOpenModal } = useContext(AppContext);
-  const { guardar, actualizarDatos, isLoading, setIsLoading } =
+  const { isLoading, handleSubmit, save, register, errors } =
     useContext(UserContext);
-  const schema = yup.object().shape({
-    email: yup
-      .string()
-      .email("no cumple con el formato de email")
-      .required("Es un campo requerido"),
-    password: yup
-      .string()
-      .min(4, "LA contraseña no puede ser menor a 4 caracteres")
-      .max(32)
-      .required("Es un campo requerido"),
-  });
-  const {
-    register,
-    handleSubmit,
-    reset,
-    setError,
-    clearErrors,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-  const save = async (data) => {
-    clearErrors();
-    try {
-      const rta = await guardar(data);
-      reset();
-      actualizarDatos();
-      clearErrors();
-      setOpenModal(false);
-    } catch (error) {
-      setIsLoading(false);
-      setError("server", error);
-    }
-  };
 
   return (
-    <form className="form userform" onSubmit={handleSubmit(save)}>
+    <form className="form userform" onSubmit={handleSubmit(save)} noValidate>
       {isLoading && Spinner}
-
+      <p className="errors">{errors.server?.message}</p>
       <p className="form-titulo">Crear nuevo usuario</p>
       <label htmlFor="email" className="label">
         Correo eléctronico

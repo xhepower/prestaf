@@ -3,8 +3,7 @@ import { useContext } from "react";
 import App from "../../routes/App";
 function Item(props) {
   const { item, eliminar } = props;
-
-  const { setSelectedGasto, selectedGasto } = useContext(Appcontext);
+  const { setSelectedGasto } = useContext(Appcontext);
   return (
     <div className={"lista-item"}>
       <div className="lista-datos">
@@ -23,6 +22,10 @@ function Item(props) {
         <p className="datos-linea">
           <b>Monto: </b>
           {item.monto}
+        </p>
+        <p className="datos-linea">
+          <b>Emitido: </b>
+          {item.emitido}
         </p>
       </div>
       <div className="lista-actions">

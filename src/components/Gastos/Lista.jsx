@@ -5,8 +5,10 @@ import Appcontext from "../../context/AppContext";
 import PopUp from "../../containers/PopUp";
 import PopUp2 from "../../containers/PopUp2";
 import { useContext } from "react";
+import GastoContext from "../../context/GastoContext";
 import Add from "./forms/Add";
 import PageUser from "../../pages/Users";
+import Spinner from "../Spinner";
 function Lista() {
   const {
     selectedGasto,
@@ -16,6 +18,7 @@ function Lista() {
     setOpenModal2,
     setSelectedGasto,
   } = useContext(Appcontext);
+  const { isLoading, errors } = useContext(GastoContext);
   return (
     <>
       <div className="Login-container pagina-cabecera">
@@ -33,7 +36,8 @@ function Lista() {
       </div>
       <div className="lista">
         <p className="lista-titulo">Lista de gastos</p>
-
+        {isLoading && <Spinner></Spinner>}
+        <p className="errors">{errors.server?.message}</p>
         {selectedGasto != 0 && (
           <div className="selectedId">
             <p>{`El id seleccionado es ${selectedGasto}`}</p>

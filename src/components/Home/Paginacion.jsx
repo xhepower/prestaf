@@ -23,7 +23,7 @@ function Paginacion(props) {
 
     setItemOffset(newOffset);
   };
-  //console.log(currentData);
+
   return (
     <div className="paginacion-container">
       <p className="lista-titulo">{titulo}</p>

@@ -10,8 +10,7 @@ import UserContext from "../../context/UserContext";
 function Lista() {
   const { selectedUser, openModal, setOpenModal, setSelectedUser } =
     useContext(Appcontext);
-  const { isLoading, setIsLoading, isError, setIsError } =
-    useContext(UserContext);
+  const { isLoading, errors } = useContext(UserContext);
   return (
     <>
       <div className="Login-container pagina-cabecera">
@@ -29,7 +28,7 @@ function Lista() {
       <div className="lista">
         <p className="lista-titulo">Lista de usuarios</p>
         {isLoading && <Spinner></Spinner>}
-
+        <p className="errors">{errors.server?.message}</p>
         {selectedUser != 0 && (
           <div className="selectedId">
             <p>{`El id seleccionado es ${selectedUser}`}</p>

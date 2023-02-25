@@ -1,51 +1,25 @@
 import { useContext } from "react";
 import ClienteContext from "../../../context/ClienteContext";
-import RutaContext from "../../../context/RutaContext";
-import AppContext from "../../../context/AppContext";
-import RutasPage from "../../../pages/Rutas";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import Spinner from "../../Spinner";
 function Add(props) {
   const {
-    setOpenModal,
-    setOpenModal2,
-    selectedRuta,
-    setSelectedRuta,
-    currentUser,
-  } = useContext(AppContext);
-  const { guardar, actualizarDatos } = useContext(ClienteContext);
-  const schema = yup.object().shape({
-    idRuta: yup.number().integer().min(1),
-    nombre: yup.string().min(4).required(),
-    identidad: yup.string().min(4).required(),
-    direccion: yup.string().min(4).required(),
-    telefono: yup.string().min(4).required(),
-  });
-  const onIdRutaChange = (e) => {
-    setSelectedRuta(parseInt(e.target.value));
-  };
-  const {
-    register,
+    guardar,
+    actualizarDatos,
+    isLoading,
     handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-  const save = async (data) => {
-    data.idUser = currentUser;
-    const rta = await guardar(data);
-    reset();
-    actualizarDatos();
-    setSelectedRuta(0);
-    setOpenModal2(false);
-    setOpenModal(false);
-  };
+    save,
+    errors,
+    selectedRuta,
+    register,
+    onIdRutaChange,
+    setOpenModal2,
+  } = useContext(ClienteContext);
 
   return (
     <form className="form rutaform" onSubmit={handleSubmit(save)}>
       <p className="form-titulo">Crear nueva cliente</p>
+      {isLoading && <Spinner></Spinner>}
+      <p className="errors">{errors.server?.message}</p>
       <label htmlFor="idRuta" className="label">
         Id Ruta:
       </label>

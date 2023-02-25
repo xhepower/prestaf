@@ -30,11 +30,10 @@ function useChangePassword() {
   });
 
   const save = async (data) => {
-    //console.log(data);
     setIsLoading(true);
     clearErrors();
     const { password1, password2 } = data;
-    console.log(password1 == password2);
+
     try {
       if (password1 == password2) {
         let elToken = new URLSearchParams(document.location.search).get(
@@ -44,7 +43,6 @@ function useChangePassword() {
           newPassword: password1,
           token: elToken,
         };
-        console.log(adata);
         const rta = await authService.changePassword(adata);
         window.location.href = "/password-recovery";
       } else {

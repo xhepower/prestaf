@@ -55,14 +55,8 @@ function useReportes() {
       let sumaPrestamo = 0;
       let sumaGasto = 0;
       let sumaPago = 0;
-      // datosPrestamos.map((item) =>
-      //   console.log(entreFechas(moment(item.emitido).toDate(), fecha1, fecha2))
-      // );
       setPrestamos(
         datosPrestamos.filter((item) => {
-          console.log(
-            entreFechas(moment(item.emitido).toDate(), fecha1, fecha2)
-          );
           if (entreFechas(moment(item.emitido).toDate(), fecha1, fecha2)) {
             setsPrestamos(sPrestamos + item.monto);
             return true;
@@ -71,9 +65,6 @@ function useReportes() {
           }
         })
       );
-
-      console.log(prestamos);
-      console.log(sPrestamos);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
