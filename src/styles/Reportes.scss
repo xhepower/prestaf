@@ -1,12 +1,55 @@
 @import "Global";
-.cuadro {
-  background-color: $color2;
+.bloque {
+  display: flex;
+  flex-direction: column;
+}
+.bloque-principal {
+  background-color: $color1;
   max-width: 300px;
   width: 100;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 2%;
   border: 1px solid $color1;
   margin: 1%;
   border-radius: 5px;
+  color: $color3;
+}
+.bloque-detalle {
+  background-color: $color2;
+  padding: 2%;
+  border: 1px solid $color1;
+  margin: 1%;
+  border-radius: 5px;
+  display: none;
+}
+.detalle-abierto {
+  display: flex;
+}
+.paginacion-container {
+  width: 300px;
+  max-width: 300px;
+  border: 2px solid $color1;
+  border-radius: 5px;
+  margin-top: 23px;
+  padding: 5px;
+}
+.pagination {
+  margin: 10px;
+
+  display: flex;
+  justify-content: space-between;
+}
+.page-item {
+  list-style: none;
+  border: 1px solid $color1;
+  border-radius: 5px;
+  background-color: $color1;
+  box-shadow: 2px 2px $color5;
+  color: $color3;
+  cursor: pointer;
+}
+td {
+  color: $color4;
 }

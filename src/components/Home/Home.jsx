@@ -12,7 +12,6 @@ function Home() {
   let vencidos = [];
   let porVencer = [];
   datosPrestamos.map((prestamo) => {
-    console.log(moment().toDate(), moment(prestamo.vencimiento).toDate());
     if (prestamo.pagado == false) {
       if (currentRole == "admin") {
         if (moment(prestamo.vencimiento) <= moment()) {

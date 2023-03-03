@@ -28,6 +28,9 @@ class PrestamoService {
   update(id, data) {
     return http.patch(`/prestamos/${id}`, data);
   }
+  actualizarRutas() {
+    return http.post(`/prestamos/actualizar-moras`);
+  }
 }
 
 export default new PrestamoService();

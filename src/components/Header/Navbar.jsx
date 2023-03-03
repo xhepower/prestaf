@@ -1,5 +1,6 @@
 import { NavbarWrapper } from "./NavbarWrapper";
 import { Link } from "react-router-dom";
+import PrestamoService from "../../services/prestamo.service";
 import Appcontext from "../../context/AppContext";
 import { useContext } from "react";
 function Navbar({ open, setOpen }) {
@@ -10,6 +11,17 @@ function Navbar({ open, setOpen }) {
   };
   const cerrarMenu = () => {
     setOpen(false);
+  };
+  const actualizarMoras = () => {
+    if (window.confirm("¿Desea actualizar moras, ahora?")) {
+      (async () => {
+        try {
+          await PrestamoService.actualizarRutas();
+        } catch (error) {
+          console.error(error);
+        }
+      })();
+    }
   };
   return (
     <NavbarWrapper open={open}>
@@ -38,7 +50,10 @@ function Navbar({ open, setOpen }) {
       <Link to="/gastos" onClick={cerrarMenu}>
         Gastos
       </Link>
-
+      <Link to="/reportes" onClick={cerrarMenu}>
+        Reportes
+      </Link>
+      <Link onClick={actualizarMoras}>Actualizar moras</Link>
       <Link to="/users" onClick={handleClickSalir}>
         Salir
       </Link>
