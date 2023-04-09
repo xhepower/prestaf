@@ -18,7 +18,19 @@ function usePrestamos() {
     setSelectedCliente,
     currentUser,
   } = useContext(AppContext);
+  function contarDomingos(desde, hasta) {
+    var contador = 0;
+    var fecha = moment(desde);
 
+    while (fecha.isSameOrBefore(hasta)) {
+      if (fecha.day() === 0) {
+        contador++;
+      }
+      fecha.add(1, "day");
+    }
+
+    return contador;
+  }
   const schema = yup.object().shape({
     idCliente: yup.number().integer().min(1),
     monto: yup.number().min(0).required(),
@@ -36,10 +48,14 @@ function usePrestamos() {
     setSliderValue(parseFloat(getValues("tasa")));
     const emitido = moment(getValues("emitido"));
     const vencimiento = moment(getValues("vencimiento"));
+    //console.log(contarDomingos(emitido, vencimiento));
     const dias = vencimiento.diff(emitido, "days");
-    const saldo = monto + monto * tasa * dias;
+    const domingos = contarDomingos(emitido, vencimiento);
+    console.log(dias, domingos);
+    const saldo = monto + monto * tasa * (dias - domingos);
     setValue("saldo", parseFloat(saldo));
   };
+
   const {
     register,
     handleSubmit,
