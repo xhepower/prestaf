@@ -1,4 +1,4 @@
-import http from "../http-commons";
+import http from "./http-commons";
 //const axios = require("axios").default;
 class AuthService {
   login(data) {

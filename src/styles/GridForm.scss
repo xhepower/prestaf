@@ -1,0 +1,15 @@
+@import "Global";
+.table-details {
+  width: 100%; /* La tabla toma el ancho completo del contenedor */
+  border-collapse: collapse;
+}
+.grid-item {
+  border: 1px solid #ccc;
+  color: $color1;
+  padding: 10px;
+  text-align: center;
+}
+.table-header {
+  color: $color6;
+  text-emphasis: filled red over;
+}

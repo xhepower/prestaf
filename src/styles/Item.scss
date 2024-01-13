@@ -1,0 +1,32 @@
+@import "Global";
+.item {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), 0 0 0 1px #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.item-datos {
+  margin-bottom: 10px;
+}
+.item-field {
+  color: $color8;
+}
+.item-key {
+  color: $color7;
+}
+.item-botones {
+  display: flex;
+  justify-content: space-between;
+}
+.button-eliminar {
+  border-radius: 5px;
+  color: $color8;
+  background-color: $color3;
+  padding: 3px;
+}
+.button-editar {
+  border-radius: 5px;
+  color: $color8;
+  background-color: $color2;
+  padding: 3px;
+}

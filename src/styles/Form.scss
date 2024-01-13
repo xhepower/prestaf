@@ -1,0 +1,27 @@
+@import "Global";
+.app-form {
+  display: block;
+  text-align: center;
+  width: 100%;
+  padding: 3px;
+  background-color: $color7;
+}
+input,
+label,
+a {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0px;
+  color: $color1;
+}
+a {
+  color: $color4;
+}
+label {
+  color: $color1;
+}
+.primary-button {
+  background-color: $color10;
+  color: $color8;
+  border-radius: 55px;
+}

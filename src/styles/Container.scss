@@ -1,0 +1,18 @@
+@import "Global";
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background-color: $color10;
+  border-radius: 5px;
+  overflow-y: hidden;
+}
+.into-container {
+  width: 100%;
+  justify-content: space-between;
+}

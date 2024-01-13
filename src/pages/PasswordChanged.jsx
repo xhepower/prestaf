@@ -1,8 +1,8 @@
 import React from "react";
-
+import "../styles/Form.scss";
 function PasswordChanged() {
   const handleClick = () => {
-    window.location.href = "/";
+    window.location.href = "/login";
   };
   return (
     <div className="login">

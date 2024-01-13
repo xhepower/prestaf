@@ -1,6 +1,6 @@
 import useChangePassword from "../hooks/useChangePassword";
 import Spinner from "../components/Spinner";
-
+import "../styles/Form.scss";
 function ChangePassword() {
   const { handleSubmit, save, isLoading, errors, register } =
     useChangePassword();
